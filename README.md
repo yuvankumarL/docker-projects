@@ -4,6 +4,7 @@ In this i have added those 4 projects handled with.
 Also I have given the installation guide for docker installation in ubuntu
 
 ## project1_Setting-Up-ssh-connection-between-2-ubuntu-containers
+![project1](https://github.com/yuvankumarL/Movie_find/blob/main/static/project1.png)
 - Pulled the ubunutu image from the docker hub to my local system
 - created two ubuntu containers named container1 and container2
 - In container1 installed openssh-server and configured it
@@ -12,6 +13,7 @@ Also I have given the installation guide for docker installation in ubuntu
 - connected the server(container1) from client(container2) using ssh
 
 ## project2_Dockerizing-apache-web-server
+![project1](https://github.com/yuvankumarL/Movie_find/blob/main/static/project2.png)
 - Dockerized the apache web server running in ubuntu
 -  Using dockerfile i have pulled the ubuntu image
 - in that os i have installed my apache server
@@ -20,6 +22,7 @@ Also I have given the installation guide for docker installation in ubuntu
 - Build a docker image and run the image
 
 ## project3_Dockerizing-the-nginx-server
+![project1](https://github.com/yuvankumarL/Movie_find/blob/main/static/project3.png)
 - Dockerized the webpage running in the nginx server
 - From the ubuntu image
 - i have installed the nginx server into it
@@ -28,6 +31,7 @@ Also I have given the installation guide for docker installation in ubuntu
 - build the docker image for the docker file
 
 ## project_4_Dockerizing_movie_library_flask_app
+![project1](https://github.com/yuvankumarL/Movie_find/blob/main/static/project4.png)
 - Dockerized a Movie Library a flask based app
 - from the docker file, installed the python
 - changed the working directory
