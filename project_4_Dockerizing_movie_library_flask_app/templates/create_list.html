@@ -1,0 +1,9 @@
+<form method="POST" action="{{ url_for('create_list') }}">
+    <label for="name">List Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="is_public">Public:</label>
+    <input type="checkbox" id="is_public" name="is_public" value="1">
+
+    <button type="submit">Create List</button>
+</form>

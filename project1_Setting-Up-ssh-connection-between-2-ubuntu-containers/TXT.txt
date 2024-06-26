@@ -1,0 +1,9 @@
+# install the ubuntu image into docker container
+sudo docker pull ubuntu
+
+#verify the image installation
+sudo docker images
+
+#Now create the first docker container
+sudo docker run -it --name container1 ubuntu
+

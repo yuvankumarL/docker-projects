@@ -1,0 +1,135 @@
+﻿# install the ubuntu image into docker container
+sudo docker pull ubuntu
+
+#verify the image installation
+sudo docker images
+
+
+#Now create the first docker container
+
+sudo docker run -it --name container1 ubuntu
+container1
+
+#Run the container1
+sudo docker run -it --name container1 ubuntu
+#update the ubuntu container
+root@552feaa193d6:/# apt-get update
+
+#install openssh-server
+apt-get install openssh-server
+
+config based on your location:
+
+Please select the geographic area in which you live. Subsequent configuration
+questions will narrow this down by presenting a list of cities, representing
+the time zones in which they are located.
+
+  1. Africa   3. Antarctica  5. Asia      7. Australia  9. Indian    11. Etc
+  2. America  4. Arctic      6. Atlantic  8. Europe     10. Pacific
+Geographic area: 
+
+Please select the city or region corresponding to your time zone.
+
+  1. Antananarivo  4. Cocos      7. Mahe       10. Mayotte
+  2. Chagos        5. Comoro     8. Maldives   11. Reunion
+  3. Christmas     6. Kerguelen  9. Mauritius
+Time zone: 
+
+#now the installation is successful
+
+#command to reconfigure the openssh-server
+sudo dpkg-reconfigure tzdata
+
+#install nano editor
+apt-get install nano
+nano –version
+
+#configure the authentication part
+nano /etc/ssh/sshd_config
+
+--> In the file change the #PermitRootLogin prohibit-password to PermitRootLogin yes
+--> Press Ctl + X and Enter Y to save the file
+
+# verify the status of the services
+service --status-all
+ [ - ]  dbus
+ [ - ]  procps
+ [ - ]  ssh
+
+
+# start the ssh server
+service ssh start
+ * Starting OpenBSD Secure Shell server sshd                             [ OK ] 
+
+#verify
+service --status-all
+ [ - ]  dbus
+ [ - ]  procps
+ [ + ]  ssh
+
+# change the password to the container1 
+passwd root
+New password: 
+Retype new password: 
+passwd: password updated successfully
+
+#exit
+exit
+
+# Now create a client side container named container2
+sudo docker run -it --name container2 ubuntu
+
+root@92d0fe4c9c33:/# apt-get update
+
+#install the client
+apt-get install openssh-client
+
+#exit
+
+
+#Now start the container1
+sudo docker start container1
+
+#get the IP Address of the container1
+sudo docker inspect container1 | grep IPAddress
+            "SecondaryIPAddresses": null,
+            "IPAddress": "172.17.0.2",
+                    "IPAddress": "172.17.0.2",
+
+#now start the container2
+sudo docker start container2
+
+#execute the container2
+sudo docker exec -it container2 bash
+
+#connect to the client system using ssh
+root@92d0fe4c9c33:/# ssh root@172.17.0.2
+The authenticity of host '172.17.0.2 (172.17.0.2)' can't be established.
+ED25519 key fingerprint is SHA256:LiJShO3stCNVZ+e9SIAYnGXuf6VycGYJftjDhLPfxec.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? y
+Please type 'yes', 'no' or the fingerprint: u1
+Please type 'yes', 'no' or the fingerprint: yes
+Warning: Permanently added '172.17.0.2' (ED25519) to the list of known hosts.
+root@172.17.0.2's password: 
+Welcome to Ubuntu 24.04 LTS (GNU/Linux 6.5.0-15-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+root@552feaa193d6:~# ^C
+root@552feaa193d6:~# 
+

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Welcome, {{ current_user.username }}</h1>
+<h2>Your Movie Lists</h2>
+{% if lists %}
+    <ul>
+        {% for list in lists %}
+            <li><a href="{{ url_for('list_details', list_id=list['id']) }}">{{ list['name'] }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>You haven't created any movie lists yet.</p>
+{% endif %}
+<a href="{{ url_for('search') }}">Search for Movies</a>
+{% endblock %}

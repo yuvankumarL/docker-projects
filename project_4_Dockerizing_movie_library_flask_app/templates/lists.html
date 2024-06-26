@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}My Lists{% endblock %}
+
+{% block content %}
+    <h1>My Movie Lists</h1>
+    {% if lists %}
+        <ul>
+            {% for list in lists %}
+                <li>
+                    <a href="{{ url_for('list_details', list_id=list.id) }}">{{ list.name }}</a>
+                    {% if list.is_public %}
+                        (Public)
+                    {% else %}
+                        (Private)
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't created any movie lists yet.</p>
+    {% endif %}
+    <form action="{{ url_for('create_list') }}" method="post">
+        <input type="text" name="name" placeholder="List Name" required>
+        <label>
+            <input type="checkbox" name="is_public">
+            Public
+        </label>
+        <button type="submit">Create List</button>
+    </form>
+{% endblock %}

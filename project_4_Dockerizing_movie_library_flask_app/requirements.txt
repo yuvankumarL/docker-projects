@@ -1,0 +1,16 @@
+asarPy
+blinker
+certifi
+charset-normalizer
+click
+Flask
+Flask-Login
+gunicorn
+idna
+itsdangerous
+Jinja2
+MarkupSafe
+packaging
+requests
+urllib3
+Werkzeug

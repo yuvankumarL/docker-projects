@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ list['name'] }}</h1>
+<h2>Movies in this List</h2>
+{% if movies %}
+<ul>
+    {% for movie in movies %}
+    <li>
+        <a href="{{ movie['poster'] }}" target="_blank">
+            <img src="{{ movie['poster'] }}" alt="{{ movie['title'] }} Poster" width="100">
+        </a>
+        {{ movie['title'] }} ({{ movie['year'] }})
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No movies in this list yet.</p>
+{% endif %}
+<a href="{{ url_for('lists') }}">Back to Lists</a>
+{% endblock %}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flashes">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
